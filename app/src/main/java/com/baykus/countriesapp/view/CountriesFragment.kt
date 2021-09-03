@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baykus.countriesapp.R
 import com.baykus.countriesapp.adapter.CountryAdapter
@@ -35,10 +34,8 @@ class CountriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding =
-            FragmentCountriesBinding.inflate(inflater, container, false)
-        //    dataBinding = FragmentCountriesBinding.inflate(inflater, container, false)
-        // Inflate the layout for this fragment
+
+      binding=DataBindingUtil.inflate(inflater, R.layout.fragment_countries,container,false)
 
         return binding.root
     }
@@ -47,10 +44,21 @@ class CountriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(CountryViewModel::class.java)
-        viewModel.getDataFromIPA()
+        viewModel.refreshData()
 
         binding.countryList.layoutManager = LinearLayoutManager(context)
         binding.countryList.adapter = countryAdapter
+
+
+        binding.swipeRefreshCountry.setOnRefreshListener {
+            binding.countryList.visibility=View.GONE
+            binding.countryError.visibility=View.GONE
+            binding.countryLoading.visibility=View.VISIBLE
+            viewModel.refreshData()
+            binding.swipeRefreshCountry.visibility=View.GONE
+        }
+
+
 
         observeLiveData()
 

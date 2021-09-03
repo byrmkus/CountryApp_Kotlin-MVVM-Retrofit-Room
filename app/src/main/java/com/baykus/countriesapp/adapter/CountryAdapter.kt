@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.baykus.countriesapp.CountriesFragmentDirections
+import com.baykus.countriesapp.view.CountriesFragmentDirections
 import com.baykus.countriesapp.R
 import com.baykus.countriesapp.model.Country
+import com.baykus.countriesapp.view.CountriesFragment
 import kotlinx.android.synthetic.main.item_country.view.*
 
 class CountryAdapter(val countryList: ArrayList<Country>): RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {

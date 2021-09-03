@@ -20,7 +20,7 @@ class CountryViewModel : ViewModel() {
     val countryLoading = MutableLiveData<Boolean>()
 
     fun refreshData() {
-
+        getDataFromIPA()
     }
 
     fun getDataFromIPA() {
@@ -38,7 +38,7 @@ class CountryViewModel : ViewModel() {
 
                     override fun onError(e: Throwable) {
                         countryLoading.value = false
-                        countryLoading.value=true
+                        countryLoading.value = true
                         e.printStackTrace()
                     }
 
