@@ -1,3 +1,3 @@
 # CountryApp-MVVM-Retrofit-RxJava-Room--Kotlin</br>
-
-#Retrofit+RxJava(CompositeDisposable)+Room+Kotlin coroutines
+#Android Jetpack-->
+Retrofit(CompositeDisposable)+RxJava+KTX+Room+Kotlin coroutines+Data Binding
