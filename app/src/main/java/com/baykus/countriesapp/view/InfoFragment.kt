@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.baykus.countriesapp.databinding.FragmentInfoBinding
+import com.baykus.countriesapp.util.downloadFromUrlImage
+import com.baykus.countriesapp.util.placeHolderProgresBar
 import com.baykus.countriesapp.viewmodel.InfoViewModel
 
 
@@ -19,6 +21,9 @@ class InfoFragment : Fragment() {
 
     private lateinit var viewModel: InfoViewModel
     private lateinit var binding: FragmentInfoBinding
+    private var countryUuid = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -31,26 +36,36 @@ class InfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentInfoBinding.inflate(inflater,container,false)
+        binding = FragmentInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.let {
+           // countryUuid = Count.fromBundle(it).countryUuid
+
+
+        }
 
         viewModel = ViewModelProviders.of(this).get(InfoViewModel::class.java)
-        viewModel.getDataFromRoom()
+        viewModel.getDataFromRoom(countryUuid)
+
+
     }
 
     private fun observeLiveData() {
-        viewModel.countryInfoLiveData.observe(viewLifecycleOwner, Observer { conutry ->
-            conutry?.let {
-                binding.countryName.text = conutry.countryName
-                binding.countryCapital.text = conutry.countryCapital
-                binding.countryCurrency.text = conutry.countryCurrency
-                binding.countryLanguage.text = conutry.countryLanguage
-                binding.countryRegion.text = conutry.countryRegion
+        viewModel.countryInfoLiveData.observe(viewLifecycleOwner, Observer { country ->
+            country?.let {
+                binding.countryName.text = country.countryName
+                binding.countryCapital.text = country.countryCapital
+                binding.countryCurrency.text = country.countryCurrency
+                binding.countryLanguage.text = country.countryLanguage
+                binding.countryRegion.text = country.countryRegion
+                context?.let {
+                    binding.infoImage.downloadFromUrlImage(country.ImageUrl, placeHolderProgresBar(it))
+                }
             }
 
         })

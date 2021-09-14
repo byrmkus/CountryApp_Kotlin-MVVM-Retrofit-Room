@@ -13,8 +13,8 @@ interface CountryAPI {
     //BASE URL->/https://raw.githubusercontent.com
     //EXT-> atilsamancioglu/IA19-DataSetCountries/master/countrydataset.json
 
-    @GET("atilsamancioglu/IA19-DataSetCountries/master/countrydataset.json")
-    fun getCountries():Single<List<Country>>
+    @GET("countriesapp/countrydataset.json")
+    fun getCountries():Single<List<Country>>     //Rxjava Single:bir deva işlemi yapar sonra durur
 
 
 }

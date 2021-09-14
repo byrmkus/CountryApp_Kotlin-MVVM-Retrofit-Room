@@ -54,8 +54,8 @@ class CountriesFragment : Fragment() {
             binding.countryList.visibility=View.GONE
             binding.countryError.visibility=View.GONE
             binding.countryLoading.visibility=View.VISIBLE
-            viewModel.refreshData()
-            binding.swipeRefreshCountry.visibility=View.GONE
+            viewModel.refreshFromAPI()
+            binding.swipeRefreshCountry.isRefreshing=false
         }
 
 

@@ -1,18 +1,25 @@
 package com.baykus.countriesapp.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.baykus.countriesapp.model.Country
+import com.baykus.countriesapp.services.CountryDatabase
+import kotlinx.coroutines.launch
 
-class InfoViewModel : ViewModel() {
+class InfoViewModel(application: Application) : BaseViewModel(application) {
 
     val countryInfoLiveData = MutableLiveData<Country>()
 
-    fun getDataFromRoom() {
+    fun getDataFromRoom(uuid: Int) {
 
-        val country = Country("Turkiye", "Asia", "Ankara", "TRY", "Turkish", "www.sfdsf.com")
+        launch {
 
-        countryInfoLiveData.value = country
+            val dao = CountryDatabase(getApplication()).countryDAO()
+            val country = dao.getCountry(uuid)
+            countryInfoLiveData.value = country
+
+        }
 
     }
 }

@@ -1,40 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="country"
+            type="com.baykus.countriesapp.model.Country" />
+        <variable
+            name="listener"
+            type="com.baykus.countriesapp.adapter.CountryClickListener" />
+
+    </data>
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:orientation="horizontal">
-
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:onClick="@{listener::onCountryClicked}"
+        android:weightSum="5">
+<TextView
+    android:id="@+id/countryUuidText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    android:text="@{String.valueOf(country.uuid)"/>
         <ImageView
-            android:layout_width="wrap_content"
+            android:id="@+id/countryImage"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:src="@drawable/ic_launcher_background"/>
+            android:dowloadUrl="@{country.imageUrl}" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
                 android:padding="5dp"
+                android:text="@{country.countryName}"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/region"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Region"
-                android:textSize="16sp"
-                android:padding="5dp"/>
+                android:padding="5dp"
+                android:text="@{country.countryRegion}"
+                android:textSize="16sp" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
